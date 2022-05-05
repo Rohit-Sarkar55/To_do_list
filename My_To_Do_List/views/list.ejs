@@ -7,6 +7,26 @@
     <title>To_Do_List</title>
 </head>
 <body>
-    <h1>Its a <%= NameOfDay %> </h1>
+   
+    <% if( NameOfDay  === "Saturday"  || NameOfDay  === "Sunday"  )  { %>
+        <h1 style ="color: purple;"> <%= NameOfDay  %> </h1>
+    <% } else {%>
+        <h1 style ="color:black;"><%= NameOfDay  %> </h1>
+    <% } %>
+
+    <ul>
+        <!-- <li>Hit the Gym .. Burn Some Calories</li>
+        <li>Eat Some Food</li>
+        <li>Start Coding..</li> -->
+        <% for(var i =0; i < ntask.length ; i++){ %>
+            <li> <%= ntask[i] %> </li> 
+        <% } %>
+
+    </ul>
+
+    <form action="/" method="post">
+        <input type="text" name="newitem" placeholder="Enter New Task">
+        <button type="submit">Add</button>
+    </form>
 </body>
 </html>

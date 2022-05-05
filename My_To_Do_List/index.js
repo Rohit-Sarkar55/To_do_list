@@ -1,41 +1,31 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const request = require("request");
 
 const app = express();
 
+
 app.set("view engine", "ejs" );
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({extended : true}));
+
+var tasks= ["Hit the Gym .. Burn Some Calories" , "Eat Some Food" , "Start Coding.."];
 
 app.get("/" ,function(req ,res){
     var today = new Date();
     var Current_Day = today.getDay();
     var day ="";
-    switch (Current_Day) {
-        case 0:
-            day = "Sunday"
-            break;
-        case 1:
-            day = "Monday"
-        case 2:
-            day = "Tuesday"
-            break;
-        case 3:
-            day = "Wednesday"
-            break;
-        case 4:
-            day = "Thursday"
-            break;
-        case 5:
-            day = "Friday"
-            break;
-        case 6:
-            day = "Saturday"
-            break;
 
-        default:
-            console.log("Error Current Day is " + Current_Day );
-        }
+    var options = { 
+        weekday :"long" , 
+        day:"numeric" ,
+        month: "long"
+    };
 
-    res.render("list" , {NameOfDay:day});
+    day = today.toLocaleDateString("en-US" , options );
+    //console.log(day);
+
+    res.render("list" , {NameOfDay:day , ntask : tasks});
     /*
     if(Current_Day === 6 || Current_Day === 0){
       // day ="Weekend";
@@ -46,6 +36,16 @@ app.get("/" ,function(req ,res){
        res.render("list", {KindOfDay:day});
     }
     */
+    
+
+});
+
+app.post("/" , function(req , res){
+    var task = req.body.newitem;
+    tasks.push(task);
+    //console.log(task);
+    res.redirect("/"  );
+    
 });
 
 app.listen(3000 ,function(){
