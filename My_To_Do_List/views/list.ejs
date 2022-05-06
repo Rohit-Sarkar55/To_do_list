@@ -4,30 +4,39 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>To_Do_List</title>
 </head>
 <body>
    
-    <% if( NameOfDay  === "Saturday"  || NameOfDay  === "Sunday"  )  { %>
-        <h1 style ="color: purple;"> <%= NameOfDay  %> </h1>
-    <% } else {%>
-        <h1 style ="color:black;"><%= NameOfDay  %> </h1>
-    <% } %>
+    <div class="box" id="heading">
+        <h1> <%= NameOfDay  %> </h1>
+    </div>
+        
+    <div class="box">
+        <% for(var i =0; i < ntask.length ; i++){ %>
+            <div class="item">
+                <input type="checkbox" >
+                
+                <p> <%= ntask[i] %> </p>
+            </div>
+        <% } %>
+        
+        <form class="item" action="/" method="post">
+            <input type="text" name="newitem" placeholder="Enter New Task" autocomplete="off">
+            <button type="submit">+</button>
+        </form>
+
+    </div>
 
     <ul>
         <!-- <li>Hit the Gym .. Burn Some Calories</li>
         <li>Eat Some Food</li>
         <li>Start Coding..</li> -->
-        <% for(var i =0; i < ntask.length ; i++){ %>
-            <li> <%= ntask[i] %> </li> 
-        <% } %>
+        
 
     </ul>
 
-    <form action="/" method="post">
-        <input type="text" name="newitem" placeholder="Enter New Task">
-        <button type="submit">Add</button>
-    </form>
+    
 </body>
 </html>
