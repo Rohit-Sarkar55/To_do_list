@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
-
+const date = require(__dirname + "/date.js");
+//console.log(date);
 const app = express();
-
+//console.log(date());
 
 app.set("view engine", "ejs" );
 app.use(express.static("public"));
@@ -12,20 +13,12 @@ app.use(bodyParser.urlencoded({extended : true}));
 var tasks= ["Hit the Gym .. Burn Some Calories" , "Eat Some Food" , "Start Coding.."];
 
 app.get("/" ,function(req ,res){
-    var today = new Date();
-    var Current_Day = today.getDay();
-    var day ="";
-
-    var options = { 
-        weekday :"long" , 
-        day:"numeric" ,
-        month: "long"
-    };
-
-    day = today.toLocaleDateString("en-US" , options );
+    
     //console.log(day);
 
-    res.render("list" , {NameOfDay:day , ntask : tasks});
+    var day = date.getDate();
+    //console.log(day);
+    res.render("list" , {NameOfDay: day , ntask : tasks});
     /*
     if(Current_Day === 6 || Current_Day === 0){
       // day ="Weekend";
