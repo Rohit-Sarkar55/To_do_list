@@ -36,9 +36,13 @@ app.get("/" ,function(req ,res){
        res.render("list", {KindOfDay:day});
     }
     */
-    
 
 });
+
+app.get("/about" , function(req ,res){
+    res.render("about" );
+});
+
 
 app.post("/" , function(req , res){
     var task = req.body.newitem;
